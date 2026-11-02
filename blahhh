@@ -1,0 +1,384 @@
+Registrations form
+EventService
+ └── src/main/java
+     └── com.example.event_service
+         ├── EventServiceApplication.java
+         └── EventController.java
+ └── src/main/resources
+     └── application.properties
+
+Code:
+EventServiceApplication.java
+package com.example.event_service;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class EventServiceApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(EventServiceApplication.class, args);
+    }
+}
+Student .java
+package com.example.event_service;
+
+public class Student {
+
+    public String name;
+    public String email;
+    public String dept;
+    public String event;
+
+}
+EventController.java
+package com.example.event_service;
+
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api")
+public class EventController {
+
+    @GetMapping("/events")
+    public String events() {
+        return """
+            Available Events:
+            1. Python Workshop
+            2. Java Workshop
+            3. AI Seminar
+            4. Cloud Computing
+            5. Web Development
+            6. Cyber Security
+            7. Data Science
+            8. Android Development
+            """;
+    }
+
+    @PostMapping("/register")
+    public String register(@RequestBody Student s) {
+
+        return "Registration Successful!\n"
+             + "Name: " + s.name + "\n"
+             + "Email: " + s.email + "\n"
+             + "Department: " + s.dept + "\n"
+             + "Event: " + s.event;
+    }
+}
+Applications.properties
+spring.application.name=event-service
+server.port=8085
+ 
+
+
+
+
+
+
+
+
+
+  Explore git and github commands
+
+Push an existing HTML project to GitHub using VS Code
+Step 1: Open your project in VS Code
+Suppose your folder structure is:
+MyWebsite/
+   index.html
+   style.css
+   script.js
+1.	Open VS Code.
+2.	Click File → Open Folder.
+3.	Select MyWebsite.
+4.	Click Terminal → New Terminal.
+Your terminal should show something like:
+/home/aritrika/MyWebsite$
+Step 2: Initialize Git
+git init
+Output:
+Initialized empty Git repository in
+/home/aritrika/MyWebsite/.git/
+This converts your project folder into a Git repository.
+Step 3: Configure your username and email
+(Only required the first time.)
+git config --global user.name "Aritrika Das"
+
+git config --global user.email "your-email@gmail.com"
+Verify:
+git config --list
+Step 4: Check repository status
+git status
+Output:
+Untracked files:
+    index.html
+    style.css
+    script.js
+Git has detected your files but isn't tracking them yet.
+Step 5: Add files to staging area
+git add .
+The . means add all files in the current project folder.
+Check:
+git status
+Output:
+Changes to be committed:
+
+    new file: index.html
+    new file: style.css
+    new file: script.js
+Step 6: Commit changes
+git commit -m "Initial commit"
+Output:
+[master abc1234] Initial commit
+3 files changed
+Your files are now saved in your local Git repository.
+Step 7: Create a GitHub repository
+1.	Open GitHub.
+2.	Log in.
+3.	Click the + icon → New repository.
+4.	Enter repository name: MyWebsite.
+5.	Select Public.
+6.	Click Create repository.
+Copy the repository URL. It'll look like:
+https://github.com/username/MyWebsite.git
+Don't initialize it with a README, license or gitignore because you already have a local project.
+Step 8: Connect local project to GitHub
+Back in VS Code terminal:
+git remote add origin https://github.com/username/MyWebsite.git
+Replace username with your actual GitHub username.
+Check connection:
+git remote -v
+Output:
+origin  https://github.com/username/MyWebsite.git (fetch)
+origin  https://github.com/username/MyWebsite.git (push)
+Step 9: Push to GitHub
+First, rename your branch to main:
+git branch -M main
+Now push:
+git push -u origin main
+Step 10: Verify on GitHub
+Refresh your GitHub repository page.
+You should see all your files there!
+All commands together – Lab exam revision
+These are the commands you actually need to remember:
+# 1. Initialize repository
+git init
+
+# 2. Configure username and email (first time)
+git config --global user.name "24wh1a05j6-Harini"
+git config --global user.email "24wh1a05j6@bvrithyderabad.edu.in"
+
+# 3. Check status
+git status
+
+# 4. Add all files
+git add .
+
+# 5. Commit
+git commit -m "Initial commit"
+
+# 6. Rename branch
+git branch -M main
+
+# 7. Connect GitHub repository
+git remote add origin https://github.com/username/MyWebsite.git
+
+# 8. Push to GitHub
+git push -u origin main
+What if you modify your HTML file later?
+You don't need to repeat all the above steps!
+Just execute:
+git add .
+git commit -m "Updated website"
+git push
+That's it!
+
+
+
+Jenkins
+1. What is Jenkins?
+Jenkins is an open-source automation server used in DevOps.
+It automates tasks like:
+•	Fetching source code from GitHub.
+•	Compiling the code.
+•	Running the program.
+•	Checking whether the build was successful or failed.
+This process is part of CI/CD (Continuous Integration and Continuous Delivery/Deployment).
+2. What are we doing in this experiment?
+There are two main parts:
+Part A: Installing and setting up Jenkins
+1.	Linux terminal commands:
+
+	java -version
+	sudo apt update
+	sudo apt install jenkins
+  
+4. Start Jenkins
+	  sudo systemctl start jenkins
+    
+5. Check Jenkins status
+   	sudo systemctl status jenkins
+    
+6. Enable Jenkins at startup
+    sudo systemctl enable jenkins
+    
+7. Get initial admin password (only during initial setup)
+  	sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+    
+After running these commands
+8.	Open your browser:
+     	http://localhost:8080
+9.	Create an admin account and open the Jenkins dashboard.
+
+Part B: Creating and running a Jenkins job
+1.	Click New Item to create a new build job.
+2.	Enter the project name.
+3.	Under Source Code Management, provide the GitHub repository URL.
+4.	Under Build Steps, select the appropriate command execution option.
+5.	Enter Java commands:
+javac HelloWorld.java
+java HelloWorld
+6.	Click Save.
+7.	Click Build Now.
+8.	Open Console Output to check whether the program executed successfully.
+
+
+
+Jenkins ci cd
+PROGRAM 5: CI/CD using Jenkins
+CI: Continuous Integration — automatically builds and tests code changes.
+CD: Continuous Delivery/Deployment — prepares or deploys tested applications.
+Pipeline: Sequence of automated Jenkins stages.
+Stage: Individual step in a pipeline.
+Jenkinsfile: File containing pipeline instructions.
+
+Steps:
+Open http://localhost:8080.
+Click New Item.
+Enter MyPipeline.
+Select Pipeline → OK.
+Scroll to Pipeline.
+Select Pipeline script.
+Paste:
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Getting source code'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building application'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing application'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application'
+            }
+        }
+    }
+}
+Click Save.
+Click Build Now.
+Open build number → Console Output.
+Output: Jenkins browser displays all stages and Finished: SUCCESS.
+Note: This is a demonstration pipeline; echo commands do not actually build or deploy an application.
+
+
+
+
+
+
+
+Docker commands
+1. Check whether Docker is working
+     docker --version
+     docker info
+2. Image management
+     docker pull ubuntu
+     docker images
+     docker rmi IMAGE_ID
+3. Container lifecycle
+     docker run -it ubuntu bash
+You'll enter a new Linux shell inside the container.
+Inside that container, try:
+    pwd
+    ls
+    exit
+Now run these commands in your normal Linux terminal:
+    docker ps
+    docker ps -a
+    docker stop CONTAINER_ID
+    docker start CONTAINER_ID
+    docker rm CONTAINER_ID
+4. Working with content inside containers
+Use a running container for these commands.
+     docker exec -it CONTAINER_ID bash
+This opens a shell inside an already-running container.
+For copying files, first make sure the host file exists:
+      touch file.txt
+Copy it into the container:
+      docker cp file.txt CONTAINER_ID:/tmp/
+To copy a file back from the container:
+      docker cp CONTAINER_ID:/tmp/file.txt .
+For the second command, /tmp/file.txt must already exist inside the container. You can create it using:
+      docker exec CONTAINER_ID bash -c "echo Hello > /tmp/file.txt"
+5. Logs and inspection
+      docker logs CONTAINER_ID
+      docker inspect CONTAINER_ID
+6. Volumes
+      docker volume create mydata
+      docker volume ls
+      docker volume inspect mydata
+      docker run -it -v mydata:/app/data ubuntu bash
+Inside the container, run:
+      echo "Hello Docker" > /app/data/test.txt
+      exit
+The volume stores data persistently, even after the container is removed.
+
+
+Docker containerized
+1. Create a folder
+      mkdir docker-html-program
+      cd docker-html-program
+This creates a folder and moves into it.
+2. Create index.html
+      nano index.html
+Write this HTML code:
+      <!DOCTYPE html>
+      <html>
+      <head>
+          <title>Hello Docker</title>
+      </head>
+      <body>
+          <h1>Hello Docker Demonstration!</h1>
+          <p>This is My first Docker containerized web application.</p>
+      </body>
+      </html>
+Save and exit:
+•	Ctrl + O → Enter
+•	Ctrl + X
+3. Create Dockerfile
+      nano Dockerfile
+Write:
+      FROM nginx
+      COPY index.html /usr/share/nginx/html/
+Save and exit.
+What do these lines mean?
+•	FROM nginx – Uses the Nginx image as the base image.
+•	COPY index.html /usr/share/nginx/html/ – Copies your HTML file into Nginx's web server directory.
+4. Build the Docker image
+      docker build -t myhtml .
+•	docker build – Builds an image.
+•	-t myhtml – Names the image myhtml.
+•	. – Uses the current directory as the build context.
+5. Run the container
+Your record says:
+      docker run -d -p 8080:80 m
